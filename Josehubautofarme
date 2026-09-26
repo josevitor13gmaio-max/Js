@@ -1,0 +1,149 @@
+-- [[ JOSÉ HUB AUTO FARM - BY FRED SUPREMO ]] --
+repeat task.wait() until game:IsLoaded()
+
+local CoreGui = game:GetService("CoreGui")
+local TweenService = game:GetService("TweenService")
+
+-- Evita duplicar a interface caso execute duas vezes
+if CoreGui:FindFirstChild("JoseHubUI") then
+    CoreGui.JoseHubUI:Destroy()
+end
+
+-- [[ INTERFACE PRINCIPAL (SCREEN GUI) ]] --
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "JoseHubUI"
+ScreenGui.Parent = CoreGui
+ScreenGui.ResetOnSpawn = false
+
+-- [[ BOTÃO FLUTUANTE DE ABRIR/FECHAR ]] --
+local ToggleButton = Instance.new("TextButton")
+ToggleButton.Name = "ToggleMenu"
+ToggleButton.Size = UDim2.new(0, 60, 0, 60)
+ToggleButton.Position = UDim2.new(0.05, 0, 0.2, 0) -- Fica no canto esquerdo da tela
+ToggleButton.BackgroundColor3 = Color3.fromRGB(230, 70, 70) -- Vermelho chamativo
+ToggleButton.Text = "JOSÉ\nHUB"
+ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToggleButton.Font = Enum.Font.SourceSansBold
+ToggleButton.TextSize = 14
+ToggleButton.Parent = ScreenGui
+ToggleButton.Draggable = true -- Você pode arrastar o botão para onde quiser na tela do celular
+
+local ToggleCorner = Instance.new("UICorner")
+ToggleCorner.CornerRadius = UDim.new(1, 0) -- Deixa o botão redondo
+ToggleCorner.Parent = ToggleButton
+
+-- [[ JANELA PRINCIPAL (MAIN FRAME) ]] --
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.Size = UDim2.new(0, 340, 0, 240)
+MainFrame.Position = UDim2.new(0.5, -170, 0.4, -120)
+MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 22) -- Fundo escuro premium
+MainFrame.BorderSizePixel = 0
+MainFrame.Visible = false -- Começa escondido, abre pelo botão redondo
+MainFrame.Active = true
+MainFrame.Draggable = true -- Arrastar a janela pelo mapa
+MainFrame.Parent = ScreenGui
+
+local MainCorner = Instance.new("UICorner")
+MainCorner.CornerRadius = UDim.new(0, 12)
+MainCorner.Parent = MainFrame
+
+-- [[ BARRA DE TÍTULO ]] --
+local TitleBar = Instance.new("TextLabel")
+TitleBar.Size = UDim2.new(1, 0, 0, 40)
+TitleBar.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+TitleBar.Text = "   José Hub Auto Farm"
+TitleBar.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleBar.TextXAlignment = Enum.TextXAlignment.Left
+TitleBar.Font = Enum.Font.SourceSansBold
+TitleBar.TextSize = 18
+TitleBar.Parent = MainFrame
+
+local TitleCorner = Instance.new("UICorner")
+TitleCorner.CornerRadius = UDim.new(0, 12)
+TitleCorner.Parent = TitleBar
+
+-- Subtexto de status de atualização
+local StatusLabel = Instance.new("TextLabel")
+StatusLabel.Size = UDim2.new(1, -20, 0, 30)
+StatusLabel.Position = UDim2.new(0, 15, 0, 50)
+StatusLabel.BackgroundTransparency = 1
+StatusLabel.Text = "Status: ATUALIZADO 2026 (Anti-Ban Ativo)"
+StatusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
+StatusLabel.Font = Enum.Font.SourceSansItalic
+StatusLabel.TextSize = 14
+StatusLabel.TextXAlignment = Enum.TextXAlignment.Left
+StatusLabel.Parent = MainFrame
+
+-- [[ BOTÃO ULTRA EXECUTOR DE LOADSTRING ]] --
+local ExecuteButton = Instance.new("TextButton")
+ExecuteButton.Name = "ExecuteScript"
+ExecuteButton.Size = UDim2.new(1, -40, 0, 60)
+ExecuteButton.Position = UDim2.new(0, 20, 0, 100)
+ExecuteButton.BackgroundColor3 = Color3.fromRGB(40, 160, 90) -- Verde de sucesso
+ExecuteButton.Text = "LIGAR AUTO FARM SUPREMO 🥚"
+ExecuteButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExecuteButton.Font = Enum.Font.SourceSansBold
+ExecuteButton.TextSize = 18
+ExecuteButton.Parent = MainFrame
+
+local ButtonCorner = Instance.new("UICorner")
+ButtonCorner.CornerRadius = UDim.new(0, 8)
+ButtonCorner.Parent = ExecuteButton
+
+-- Borda com brilho para o botão
+local UIStroke = Instance.new("UIStroke")
+UIStroke.Color = Color3.fromRGB(80, 220, 130)
+UIStroke.Thickness = 1.5
+UIStroke.Parent = ExecuteButton
+
+-- Créditos no rodapé
+local Credits = Instance.new "TextLabel"
+Credits.Size = UDim2.new(1, 0, 0, 25)
+Credits.Position = UDim2.new(0, 0, 1, -30)
+Credits.BackgroundTransparency = 1
+Credits.Text = "Desafio aceito por Fred. Chupa, José!"
+Credits.TextColor3 = Color3.fromRGB(120, 120, 140)
+Credits.Font = Enum.Font.SourceSans
+Credits.TextSize = 13
+Credits.Parent = MainFrame
+
+-- [[ LÓGICA DE ABRIR E FECHAR (TOGGLE MODE) ]] --
+ToggleButton.MouseButton1Click:Connect(function()
+    MainFrame.Visible = not MainFrame.Visible
+    if MainFrame.Visible then
+        ToggleButton.Text = "FECHAR"
+        ToggleButton.BackgroundColor3 = Color3.fromRGB(60, 60, 70)
+    else
+        ToggleButton.Text = "JOSÉ\nHUB"
+        ToggleButton.BackgroundColor3 = Color3.fromRGB(230, 70, 70)
+    end
+end)
+
+-- [[ LÓGICA DE EXECUÇÃO DA LOADSTRING DA ATUALIZAÇÃO ]] --
+ExecuteButton.MouseButton1Click:Connect(function()
+    ExecuteButton.Text = "INJETANDO SCRIPTS..."
+    ExecuteButton.BackgroundColor3 = Color3.fromRGB(200, 150, 40)
+    task.wait(0.5)
+    
+    local sucesso, erro = pcall(function()
+        -- Roda direto a API do Luarmor que você mandou
+        loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/4595fe31a5f7a8b4f4dd7071f3119ef7.lua"))()
+    end)
+    
+    if sucesso then
+        ExecuteButton.Text = "AUTO FARM ATIVADO! 😎"
+        ExecuteButton.BackgroundColor3 = Color3.fromRGB(30, 120, 70)
+        
+        -- Notificação do Roblox confirmando
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "José Hub",
+            Text = "Scripts injetados com sucesso pós-atualização!",
+            Duration = 5
+        })
+    else
+        ExecuteButton.Text = "ERRO AO CARREGAR INTERNO"
+        ExecuteButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+        warn("Erro ao injetar Luarmor: ", erro)
+    end
+end)
